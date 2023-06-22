@@ -42,8 +42,14 @@ export class AuthService {
   async register(
     registerUserDto: RegisterUserDto,
   ): Promise<{ accessToken: string }> {
-    const { name, lastName, email, password, confirmPassword } =
-      registerUserDto;
+    const {
+      name,
+      fatherLastName,
+      motherLastName,
+      email,
+      password,
+      confirmPassword,
+    } = registerUserDto;
 
     const foundUser = await this.userRepository.findOneBy({ email });
     if (foundUser) {
@@ -58,7 +64,8 @@ export class AuthService {
 
     const newUser = new User();
     newUser.name = name;
-    newUser.lastName = lastName;
+    newUser.fatherLastName = fatherLastName;
+    newUser.motherLastName = motherLastName;
     newUser.email = email;
 
     const salt = await bcrypt.genSalt();

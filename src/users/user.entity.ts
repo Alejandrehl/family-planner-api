@@ -5,7 +5,15 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Notification } from 'src/notifications/notification.entity';
+
+export enum UserRole {
+  Client = 'Client',
+  Admin = 'Admin',
+  Staff = 'Staff',
+}
 
 @Entity()
 export class User {
@@ -16,7 +24,10 @@ export class User {
   name: string;
 
   @Column({ nullable: false })
-  lastName: string;
+  fatherLastName: string;
+
+  @Column({ nullable: false })
+  motherLastName: string;
 
   @Column({ unique: true, nullable: false })
   email: string;
@@ -27,8 +38,11 @@ export class User {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ default: 'CLIENT' })
-  role: string;
+  @Column({ default: UserRole.Client, enum: UserRole })
+  role: UserRole;
+
+  @OneToMany(() => Notification, (notification) => notification.user)
+  notifications: Notification[];
 
   @CreateDateColumn()
   createdAt: Date;

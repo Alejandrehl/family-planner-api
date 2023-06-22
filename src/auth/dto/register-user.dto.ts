@@ -8,10 +8,16 @@ export class RegisterUserDto {
   name: string;
 
   @ApiProperty({
-    description: 'User last name',
+    description: 'User father last name',
     type: String,
   })
-  lastName: string;
+  fatherLastName: string;
+
+  @ApiProperty({
+    description: 'User mother last name',
+    type: String,
+  })
+  motherLastName: string;
 
   @ApiProperty({
     description: 'User email',

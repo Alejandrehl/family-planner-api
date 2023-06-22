@@ -57,4 +57,21 @@ export class NotificationsService {
 
     await this.notificationRepository.remove(notification);
   }
+
+  async markAsReaded(id: number): Promise<Notification> {
+    const notification = await this.notificationRepository.findOneBy({ id });
+
+    if (!notification) {
+      throw new NotFoundException();
+    }
+
+    notification.isRead = true;
+
+    const errors = await validate(notification);
+    if (errors.length > 0) {
+      throw new BadRequestException(errors);
+    }
+
+    return await this.notificationRepository.save(notification);
+  }
 }

@@ -5,6 +5,7 @@ import {
   Get,
   Logger,
   Param,
+  Patch,
   Post,
   UseGuards,
   ValidationPipe,
@@ -75,5 +76,12 @@ export class NotificationsController {
   @ApiOkResponse({ description: 'Returns void' })
   delete(@Param('id') id: number): Promise<void> {
     return this.notificationsService.remove(id);
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Mark notification as read' })
+  @ApiOkResponse({ description: 'Notification marked as readed successfully' })
+  markAsReaded(@Param('id') id: number): Promise<Notification> {
+    return this.notificationsService.markAsReaded(id);
   }
 }

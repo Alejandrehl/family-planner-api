@@ -26,7 +26,8 @@ export class AuthGuard implements CanActivate {
       const user = new User();
       user.id = payload['id'];
       user.name = payload['name'];
-      user.lastName = payload['lastName'];
+      user.fatherLastName = payload['fatherLastName'];
+      user.motherLastName = payload['motherLastName'];
       user.email = payload['email'];
       user.phone = payload['phone'];
       user.role = payload['role'];
