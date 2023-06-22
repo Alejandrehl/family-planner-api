@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Notification } from 'src/notifications/notification.entity';
+import { Device } from 'src/devices/device.entity';
 
 export enum UserRole {
   Client = 'Client',
@@ -43,6 +44,9 @@ export class User {
 
   @OneToMany(() => Notification, (notification) => notification.user)
   notifications: Notification[];
+
+  @OneToMany(() => Device, (device) => device.user)
+  devices: Device[];
 
   @CreateDateColumn()
   createdAt: Date;
