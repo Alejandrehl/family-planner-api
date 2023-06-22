@@ -1,6 +1,6 @@
 # Family Planner API 🚀
 
-API for Family Planner application.
+API for Family Planner application
 
 ## Current ToDo List
 
